@@ -1,4 +1,5 @@
 {
+    "name": "node-horseman",
     "main": "index.d.ts",
-    "name": "node-horseman"
+    "version": "3.3.0"
 }

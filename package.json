@@ -1,0 +1,19 @@
+{
+    "name": "@types/node-horseman",
+    "description": "Typings for node-horseman module.",
+    "author": {
+        "email": "p.ignasiak26@gmail.com",
+        "name": "Paweł Ignasiak",
+        "url": "http://github.com/legion44"
+    },
+
+    "repository": {
+        "type": "github",
+        "url": "http://github.com/legion44/typed-node-horseman"
+    },
+
+    "main": "index.d.ts",
+    "version": "3.3.0",
+
+    "license": "MIT"
+}
