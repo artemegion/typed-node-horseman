@@ -353,11 +353,17 @@ declare module "node-horseman"
         public value(selector: string, value: string): (Horseman & Promise<void>);
 
         /**
-         * gets an `attribute` of an `selector` element
+         * sets an `attribute` of a `selector` element
          * @param {string} selector selector
          * @param {string} attribute attributee name
          */
-        public attribute(selector: string, attribute: string): (Horseman & Promise<string>);
+        public attribute(selector: string, attribute: string): (Horseman & Promise<void>);
+
+        /**
+         * gets an `attribute` of a `selector` element
+         * @param {string} selector selector
+         */
+        public attribute(selector: string): (Horseman & Promise<string>);
 
         /**
          * gets a css property
