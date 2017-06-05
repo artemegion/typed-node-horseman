@@ -3,6 +3,8 @@
  */
 declare module "node-horseman"
 {
+    namespace Horseman
+    {
     /** options for creating `Horseman` instance */
     interface IHorsemanOptions
     {
@@ -161,15 +163,16 @@ declare module "node-horseman"
     type IMouseEventType = ('mouseup' | 'mousedown' | 'mousemove' | 'doubleclick' | 'click');
 
     type IImageType = ('PNG' | 'GIF' | 'JPEG');
+    }
 
     /** horseman lets you run phantomjs from node */
-    class HorsemanInit
+    class Horseman
     {
         /**
          * creates new instance of `Horseman`
          * @param {IHorsemanOptions} options options used for creating new instance
          */
-        public constructor(options?: IHorsemanOptions);
+        public constructor(options?: Horseman.IHorsemanOptions);
 
         /**
          * send GET request to `url`
@@ -195,27 +198,27 @@ declare module "node-horseman"
          * set the user agent used by phantomjs
          * @param {string} value user agent to be used by phantomjs
          */
-        public userAgent(value: string): (HorsemanInit & Promise<void>);
+        public userAgent(value: string): (Horseman & Promise<void>);
 
         /**
          * set the `headers` used when requesting a page
          * @param {any} headers headers to use in request
          */
-        public headers(headers: any): (HorsemanInit & Promise<void>);
+        public headers(headers: any): (Horseman & Promise<void>);
 
         /**
          * set the `user` and `password` for accessing a web page using basic authentication
          * @param {string} user username
          * @param {string} password password
          */
-        public authentication(user: string, password: string): (HorsemanInit & Promise<void>);
+        public authentication(user: string, password: string): (Horseman & Promise<void>);
 
         /**
          * set the `width` and `height` of viewport
          * @param {number} width viewport width
          * @param {number} height viewport height
          */
-        public viewport(width: number, height: number): (HorsemanInit & Promise<void>);
+        public viewport(width: number, height: number): (Horseman & Promise<void>);
 
         /**
          * attach `callback` to page event, evaluated on phantomjs
@@ -240,10 +243,7 @@ declare module "node-horseman"
 
         /** closes the Horseman instance and shuts down PhantomJS */
         public close(): (Promise<void>);
-    }
 
-    class Horseman
-    {
         /** go back to the previous page */
         public back(): (Horseman & Promise<void>);
 
@@ -260,13 +260,13 @@ declare module "node-horseman"
          * sets `cookie` for page
          * @param {ICookie} cookie cookie to set
          */
-        public cookies(cookie: ICookie): (Horseman & Promise<void>);
+        public cookies(cookie: Horseman.ICookie): (Horseman & Promise<void>);
 
         /**
          * sets `cookies` for page
          * @param {ICookie[]} cookies 
          */
-        public cookies(cookies: ICookie[]): (Horseman & Promise<void>);
+        public cookies(cookies: Horseman.ICookie[]): (Horseman & Promise<void>);
 
         /**
          * sets cookies for page from cookie `file`
@@ -275,7 +275,7 @@ declare module "node-horseman"
         public cookies(file: string): (Horseman & Promise<void>);
 
         /** retrieve cookies from page */
-        public cookies(): (Horseman & Promise<ICookie[]>);
+        public cookies(): (Horseman & Promise<Horseman.ICookie[]>);
 
         /**
          * scroll to a position on the page
@@ -353,17 +353,11 @@ declare module "node-horseman"
         public value(selector: string, value: string): (Horseman & Promise<void>);
 
         /**
-         * sets an `attribute` of a `selector` element
+         * gets an `attribute` of a `selector` element
          * @param {string} selector selector
          * @param {string} attribute attributee name
          */
-        public attribute(selector: string, attribute: string): (Horseman & Promise<void>);
-
-        /**
-         * gets an `attribute` of a `selector` element
-         * @param {string} selector selector
-         */
-        public attribute(selector: string): (Horseman & Promise<string>);
+        public attribute(selector: string, attribute: string): (Horseman & Promise<string>);
 
         /**
          * gets a css property
@@ -409,7 +403,7 @@ declare module "node-horseman"
          * @param {string} text text to type
          * @param {ITypeOptions} options options containing `eventType` and `modifiers`
          */
-        public type(selector: string, text: string, options?: ITypeOptions): (Horseman & Promise<void>);
+        public type(selector: string, text: string, options?: Horseman.ITypeOptions): (Horseman & Promise<void>);
 
         /**
          * specify the `path` to upload into a file input `selector` element
@@ -461,7 +455,7 @@ declare module "node-horseman"
          * send a mouse event to the page
          * @param {IMouseEventType} type event type
          */
-        public mouseEvent(type: IMouseEventType): (Horseman & Promise<void>);
+        public mouseEvent(type: Horseman.IMouseEventType): (Horseman & Promise<void>);
 
         /**
          * send a mouse event to the page
@@ -469,7 +463,7 @@ declare module "node-horseman"
          * @param {number} x event position along x axis
          * @param {number} y event position along y axis
          */
-        public mouseEvent(type: IMouseEventType, x: number, y: number): (Horseman & Promise<void>);
+        public mouseEvent(type: Horseman.IMouseEventType, x: number, y: number): (Horseman & Promise<void>);
 
         /**
          * send a mouse event to the page
@@ -478,7 +472,7 @@ declare module "node-horseman"
          * @param {number} y event position along y axis
          * @param {string} button event button
          */
-        public mouseEvent(type: IMouseEventType, x: number, y: number, button: string): (Horseman & Promise<void>);
+        public mouseEvent(type: Horseman.IMouseEventType, x: number, y: number, button: string): (Horseman & Promise<void>);
 
         /**
          * send a keyboard event to the page
@@ -486,7 +480,7 @@ declare module "node-horseman"
          * @param {number} key event key, should be a numberical value from [this page](https://github.com/ariya/phantomjs/commit/cab2635e66d74b7e665c44400b8b20a8f225153a)
          * @param {number} modifier modifier like ctrl or shift
          */
-        public keyboardEvent(type: IKeyboardEventType, key: number, modifier?: number): (Horseman & Promise<void>);
+        public keyboardEvent(type: Horseman.IKeyboardEventType, key: number, modifier?: number): (Horseman & Promise<void>);
 
         /**
          * wait for `ms` miliseconds
@@ -589,7 +583,7 @@ declare module "node-horseman"
          * saves a screenshot of the current page as a base64 encoded string
          * @param {IImageType} type image type
          */
-        public screenshotBase64(type: IImageType): (Horseman & Promise<void>);
+        public screenshotBase64(type: Horseman.IImageType): (Horseman & Promise<void>);
 
         /**
          * takes a screenshot of the current page cropped to element
@@ -603,28 +597,28 @@ declare module "node-horseman"
          * @param {IArea} area area to crop to
          * @param {string} path filename to save screenshot to
          */
-        public crop(area: IArea, path: string): (Horseman & Promise<void>);
+        public crop(area: Horseman.IArea, path: string): (Horseman & Promise<void>);
 
         /**
          * saves a screenshot of the current page as a base64 encoded string cropped to element
          * @param {string} selector element selector to crop to
          * @param {IImageType} type image type
          */
-        public cropBase64(selector: string, type: IImageType): (Horseman & Promise<string>);
+        public cropBase64(selector: string, type: Horseman.IImageType): (Horseman & Promise<string>);
 
         /**
          * saves a screenshot of the current page as a base64 encoded string cropped to are
          * @param {IArea} area area to crop to
          * @param {IImageType} type image type
          */
-        public cropBase64(area: IArea, type: IImageType): (Horseman & Promise<string>);
+        public cropBase64(area: Horseman.IArea, type: Horseman.IImageType): (Horseman & Promise<string>);
 
         /**
          * renders the page as a pdf
          * @param {string} path filename to save pdf to
          * @param {IPaperSize} paperSize pdf page size
          */
-        public pdf(path: string, paperSize?: (IPaperSizeCustom & IPaperSizeFormat)): (Horseman & Promise<void>);
+        public pdf(path: string, paperSize?: (Horseman.IPaperSizeCustom & Horseman.IPaperSizeFormat)): (Horseman & Promise<void>);
 
         /** outputs the result of the last call in the chain */
         public log(): (Horseman & Promise<void>);
@@ -697,6 +691,5 @@ declare module "node-horseman"
         public close(): (Promise<void>);
     }
 
-    const horseman: HorsemanInit;
-    export = horseman;
+    export = Horseman;
 }
